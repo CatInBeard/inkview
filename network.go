@@ -73,6 +73,7 @@ var (
 // KeepNetwork will connect a default network interface on the device and will keep it enabled.
 // Returned function can be called to disconnect an interface.
 func KeepNetwork() (func(), error) {
+	QueryNetwork()
 	conns := Connections()
 	if len(conns) == 0 {
 		return nil, ErrNoConnections
@@ -87,4 +88,8 @@ func KeepNetwork() (func(), error) {
 		}
 	}
 	return nil, last
+}
+
+func QueryNetwork() {
+	C.QueryNetwork()
 }
