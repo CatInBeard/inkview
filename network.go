@@ -90,6 +90,15 @@ func KeepNetwork() (func(), error) {
 	return nil, last
 }
 
+// Obtained through reverse engineering, to automatically connect to the network, you need to pass null instead of the network name
+func ConnectDefault() error {
+	if int(C.NetConnect(nil)) != 0 {
+		return errors.New("Can't connect network")
+	}
+
+	return nil
+}
+
 func QueryNetwork() {
 	C.QueryNetwork()
 }
